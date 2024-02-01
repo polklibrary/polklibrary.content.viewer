@@ -1,0 +1,232 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/jquery.mobile.custom.min.js"></script>
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/film.js"></script>
+	</metal:block>
+    
+	<metal:block fill-slot="style_slot">
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/base.css" />
+	</metal:block>
+
+	<metal:content-title fill-slot="content-title"></metal:content-title>
+	<metal:content-description fill-slot="content-description"></metal:content-description>
+
+	<metal:content-core fill-slot="content-core">
+
+        <div class="record">
+            <h2><a href="${context/absolute_url}" target="_top">${context/Title}</a></h2>
+            
+            <div class="column">
+            
+                <div class="col-50">
+                    <div class="column-outer">
+                    
+                        <div class="pat-player-link">
+                            <a tal:define="image_url python:view.get_image_by_obj()"
+                               class="link" 
+                               target="_blank"
+                               href="${context/getRemoteUrl}"
+                               title="Click to play"
+                               style="background-image: url(${context/absolute_url}/++resource++polklibrary.content.viewer/play.png),url(${image_url})"
+                               >
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                        
+                        <div class="add-to-list logged-in-visible">
+                            <label>Your Playlist: </label> <span class="pat-film-list" data-id="${context/getId}" />
+                        </div>
+                        
+                        <div class="like logged-in-visible">
+                            <label>${context/likes} </label> <a href="${context/absolute_url}?like=1"></a>
+                        </div>
+                        
+                    </div>
+                        
+                </div>
+                
+                <div class="info col-50">
+                
+                    <tal:block condition="context/Description">
+                    <h4>Description</h4>
+                    <div id="description" class="pat-showmore" data-len="255">
+                        ${context/Description}
+                    </div>
+                    </tal:block>
+                    
+                    <tal:block condition="context/runtime">
+                    <h4>Runtime</h4>
+                    <div id="runtime">
+                        ${context/runtime}
+                    </div>
+                    </tal:block>
+                    
+                    <tal:block condition="context/creator">
+                    <h4>Creator</h4>
+                    <div id="creator">
+                        ${context/creator}
+                    </div>
+                    </tal:block>
+                    
+                    <tal:block condition="context/series_title">
+                    <h4>Series</h4>
+                    <ul>
+                        <li class="caps" tal:repeat="item context/series_title">
+                            <a href="${view/portal/absolute_url}/browse?series_title=${item}">${item} (<span tal:replace="python: view.get_totals('series_title', item)" />)</a>
+                        </li>
+                    </ul>
+                    </tal:block>
+                    
+                    
+                    <tal:block condition="context/subject_group">
+                    <h4>Subjects</h4>
+                    <ul>
+                        <li class="caps" tal:repeat="item context/subject_group">
+                            <a href="${view/portal/absolute_url}/browse?subject_group=${item}">${item} (<span tal:replace="python: view.get_totals('subject_group', item)" />)</a>
+                        </li>
+                    </ul>
+                    </tal:block>
+                    
+                    
+                    <tal:block condition="context/associated_entity">
+                    <h4>Contributor</h4>
+                    <ul>
+                        <li class="caps" tal:repeat="item context/associated_entity">
+                            <a href="${view/portal/absolute_url}/browse?associated_entity=${item}">${item}  (<span tal:replace="python: view.get_totals('associated_entity', item)" />)</a>
+                        </li>
+                    </ul>
+                    </tal:block>
+                    
+                    
+                    <tal:block condition="context/geography">
+                    <h4>Geography</h4>
+                    <ul>
+                        <li class="caps" tal:repeat="item context/geography">
+                            <a href="${view/portal/absolute_url}/browse?geography=${item}">${item}  (<span tal:replace="python: view.get_totals('geography', item)" />)</a>
+                        </li>
+                    </ul>
+                    </tal:block>
+                    
+                    
+                    <tal:block condition="context/genre">
+                    <h4>Genre</h4>
+                    <ul>
+                        <li class="caps" tal:repeat="item context/genre">
+                            <a href="${view/portal/absolute_url}/browse?genre=${item}">${item} (<span tal:replace="python: view.get_totals('genre', item)" />)</a>
+                        </li>
+                    </ul>
+                    </tal:block>
+                    
+                    <tal:block condition="context/date_of_publication">
+                    <h4>Date of Publication</h4>
+                    <div id="date_of_publication">
+                        ${context/date_of_publication}
+                    </div>
+                    </tal:block>
+                                 
+                    <h4>Database</h4>
+                    <div>${view/get_vender_name}</div>
+                    
+                    <h4>Direct Link</h4>
+                    <div>
+                        <a class="slink" href="${context/getRemoteUrl}" target="_blank">
+                            <img src="++resource++polklibrary.content.viewer/link.png" alt="Link" /> 
+                            ${context/getRemoteUrl} 
+                        </a>
+                    </div>
+                    
+                </div>
+                
+                <div class="clear"></div>
+                
+            </div>
+
+            <div class="column">
+            
+                <div class="pat-scroll no-select">
+                    <div class="collection" 
+                        tal:define="datapack view/get_related;
+                                    suburl python:datapack[0];
+                                    container python:datapack[1];
+                    ">
+                        
+                        <h2><a href="${container/url}">${container/title}</a></h2>
+                        <div class="scroll-left">
+                            <div class="arr-left"></div>
+                        </div>
+                        <div class="scrollbox" tal:attributes="data-items python:len(container.items)">
+                        
+                        
+                            <tal:block tal:repeat="item container/items">
+                                <a tal:define="image_url python:view.get_image_by_brain(item)"
+                                    class="item ${item/format_type} pat-overlay"
+                                    data-overlay-title="${item/Title}"
+                                    data-overlay-description=" ${item/Description}"
+                                    data-overlay-runtime="${item/runtime}"
+                                    href="${item/getURL}" 
+                                    style="background-image: url(${item/getURL}/++resource++polklibrary.content.viewer/${item/format_type}.png), url(${image_url});"
+                                >    
+                                    <div class="add-to-list suppress-add-to-list">
+                                        <span class="pat-film-list" data-id="${item/getId}" />
+                                    </div>
+                                    
+                                    <div class="title">
+                                        ${item/Title}
+                                    </div>
+                                </a>
+                            </tal:block>
+                            
+                            <a class="item" 
+                               href="${view/portal/absolute_url}/browse?${suburl}" 
+                               style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/view-more.jpg)"
+                            >
+                            </a>
+                            
+                        </div>
+                        <div class="scroll-right">
+                            <div class="arr-right"></div>
+                        </div>
+                        
+                    </div>
+                            
+                    
+                    <div id="overlay">
+                        <div class="title"> </div>
+                        <div class="description pat-showmore" data-len="255"> </div>
+                        <div class="runtime">
+                            <label>Runtime: </label>
+                            <span></span>
+                        </div>
+                        <div class="add-to-list logged-in-visible">
+                            <label>Your Playlist: </label>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                 
+                <div class="clear"></div>
+                
+            </div>
+
+            
+            
+<!--             
+            <div id="thumbnail">
+                <label>Thumb</label>
+                <img tal:condition="context/image" src="${context/absolute_url}/@@download/image/thumb.jpg" alt="Thumbnail" />
+                <img tal:condition="not: context/image" src="${context/image_url}" alt="Missing Thumb" />
+            </div> -->
+
+        </div>
+            
+	</metal:content-core>
+
+</body>
+</html>

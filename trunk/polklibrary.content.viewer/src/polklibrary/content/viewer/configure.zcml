@@ -1,0 +1,82 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="polklibrary.content.viewer">
+
+  <includeDependencies package="." />
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include package=".browser" />
+  <include package=".models" />
+
+
+    <utility
+        name="polklibrary.content.viewer.vocabularies.SeriesTitleVocabularyFactory"
+        component="polklibrary.content.viewer.vocabularies.SeriesTitleVocabularyFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        />
+    
+    <utility
+        name="polklibrary.content.viewer.vocabularies.SubjectGroupVocabularyFactory"
+        component="polklibrary.content.viewer.vocabularies.SubjectGroupVocabularyFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        />
+
+    <utility
+        name="polklibrary.content.viewer.vocabularies.AssociatedEntityVocabularyFactory"
+        component="polklibrary.content.viewer.vocabularies.AssociatedEntityVocabularyFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        />
+
+    <utility
+        name="polklibrary.content.viewer.vocabularies.GeographyVocabularyFactory"
+        component="polklibrary.content.viewer.vocabularies.GeographyVocabularyFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        />
+
+    <utility
+        name="polklibrary.content.viewer.vocabularies.GenreVocabularyFactory"
+        component="polklibrary.content.viewer.vocabularies.GenreVocabularyFactory"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        />
+  
+  
+    
+  <genericsetup:registerProfile
+      name="default"
+      title="polklibrary.content.viewer"
+      directory="profiles/default"
+      description="Installs the polklibrary.content.viewer add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="polklibrary.content.viewer-postInstall"
+      title="polklibrary.content.viewer post_install import step"
+      description="Post install import step from polklibrary.content.viewer"
+      handler=".setuphandlers.post_install">
+  </genericsetup:importStep>
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="polklibrary.content.viewer"
+      directory="profiles/uninstall"
+      description="Uninstalls the polklibrary.content.viewer add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="polklibrary.content.viewer-uninstall"
+      title="polklibrary.content.viewer uninstall import step"
+      description="Import step run during ininstalling polklibrary.content.viewer"
+      handler=".setuphandlers.uninstall">
+  </genericsetup:importStep>
+
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="polklibrary.content.viewer-hiddenprofiles" />
+
+</configure>

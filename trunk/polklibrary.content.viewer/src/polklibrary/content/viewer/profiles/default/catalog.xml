@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+
+    <!-- Record Model -->
+    <column value="query_logic"/>
+    <column value="runtime"/>
+    <column value="format_type"/>
+    <column value="creator"/>
+    <column value="date_of_publication"/>
+    <column value="sort_direction"/>
+    <column value="sort_type"/>
+    <column value="by_id"/>
+    
+	
+    <index name="by_id" meta_type="FieldIndex">
+        <indexed_attr value="by_id"/>
+    </index> 
+    <column value="by_id"/>
+    
+    <index name="image_url" meta_type="FieldIndex">
+        <indexed_attr value="image_url"/>
+    </index> 
+    <column value="image_url"/>
+    
+    <index name="series_title" meta_type="KeywordIndex">
+        <indexed_attr value="series_title"/>
+    </index> 
+    <column value="series_title"/>
+    
+    <index name="subject_group" meta_type="KeywordIndex">
+        <indexed_attr value="subject_group"/>
+    </index> 
+    <column value="subject_group"/>
+    
+    <index name="associated_entity" meta_type="KeywordIndex">
+        <indexed_attr value="associated_entity"/>
+    </index> 
+    <column value="associated_entity"/>
+    
+    <index name="geography" meta_type="KeywordIndex">
+        <indexed_attr value="geography"/>
+    </index> 
+    <column value="geography"/>
+    
+    <index name="genre" meta_type="KeywordIndex">
+        <indexed_attr value="genre"/>
+    </index> 
+    <column value="genre"/>
+    <!-- End Record Model -->
+
+    
+    
+    
+        
+</object>

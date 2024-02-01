@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+    
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+            });
+        </script>
+	</metal:block>
+    
+	<metal:block fill-slot="style_slot">
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/internal.css" />
+        
+    </metal:block>
+
+	<metal:content-title fill-slot="content-title">
+	</metal:content-title>
+
+    
+	<metal:content-core fill-slot="content-core">
+
+        <div id="exporter">
+            <h2><a href="${view/portal/absolute_url}">Utility: Export</a></h2>
+                    
+            <form method="post" enctype="multipart/form-data">
+                <label for="export-find" >Search for ID's starting with: </label>
+                <input type="text" name="form.id.query" id="export-find" />
+                <input type="submit" name="form.id.submit" value="Go" />  
+            </form>
+            
+            <form method="post" enctype="multipart/form-data">
+                <input type="submit" name="form.private.submit" value="Find Private Content" />  
+            </form>
+            
+            <textarea class="output">${view/output}</textarea>
+            
+            
+        </div>
+        
+	</metal:content-core>
+
+</body>
+</html>

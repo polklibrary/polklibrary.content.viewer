@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+    
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('form').submit(function(){
+                    $('#processing').show();
+                });
+            });
+        </script>
+	</metal:block>
+    
+	<metal:block fill-slot="style_slot">
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/internal.css" />
+	</metal:block>
+
+	<metal:content-title fill-slot="content-title">
+	</metal:content-title>
+
+    
+	<metal:content-core fill-slot="content-core">
+
+        <div id="importer">
+            <h2><a href="${view/portal/absolute_url}">Utility: Transform MARC Files to CSV</a></h2>
+            
+            <div id="error" tal:condition="view/error">ERROR:  ${view/error} </div>
+
+
+            <form method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="file-upload" > Upload: </label>
+                    <input type="file" name="form.file.upload" id="file-upload" />
+                </div>
+                
+                <div>
+                    <input type="submit" name="form.file.allcsv" value="Transform Marc to CSV (Entire record)" />
+                    <input type="submit" name="form.file.idcsv" value="Transform Marc to CSV (Only IDs)" />
+                </div>
+                
+                <div>File will automatically be download to your browser when finished.  A MARC file with 10000 records takes around 20 seconds.</div>
+                
+            </form>
+            
+
+        </div>
+        
+	</metal:content-core>
+
+</body>
+</html>

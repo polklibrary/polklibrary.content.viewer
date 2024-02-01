@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/jquery.mobile.custom.min.js"></script>   
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/film.js"></script>        
+	</metal:block>
+    
+	<metal:block fill-slot="style_slot">
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/base.css" />
+	</metal:block>
+
+	<metal:content-title fill-slot="content-title"></metal:content-title>
+	<metal:content-description fill-slot="content-description"></metal:content-description>
+
+    
+	<metal:content-core fill-slot="content-core">
+
+        <div class="pat-scroll group-list no-select">
+        
+            <div class="collection" tal:repeat="container view/group_collections">
+                
+                <h2><a href="${container/url}">${container/title}</a></h2>
+                <div class="scroll-left">
+                    <div class="arr-left"></div>
+                </div>
+                <div class="scrollbox" tal:attributes="data-items python:len(container.items)">
+                
+                    <tal:block tal:repeat="item container/items">
+                        <a tal:define="image_url python:view.get_image_by_brain(item)"
+                            class="item ${item/format_type} pat-overlay pat-images"
+                            data-overlay-title="${item/Title}"
+                            data-overlay-description=" ${item/Description}"
+                            data-overlay-runtime="${item/runtime}"
+                            href="${item/getURL}" 
+                            data-style="background-image: url(${item/getURL}/++resource++polklibrary.content.viewer/${item/format_type}.png), url(${image_url}), url('++resource++polklibrary.content.viewer/missing-thumb.png');"
+                        >       
+                            
+                            <div class="add-to-list suppress-add-to-list">
+                                <span class="pat-film-list" data-id="${item/getId}" />
+                            </div>
+                            
+                            <div class="title">
+                                ${item/Title}
+                            </div>
+                        </a>
+                    </tal:block>
+                    
+                    <a class="item" 
+                       href="${container/url}" 
+                       style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/view-more.jpg)"
+                    >
+                    </a>
+                    
+                </div>
+                <div class="scroll-right">
+                    <div class="arr-right"></div>
+                </div>
+                
+            </div>
+                    
+            
+            <div id="overlay" class="hide-1080">
+                <div class="title"> </div>
+                <div class="description pat-showmore" data-len="255"> </div>
+                <div class="runtime">
+                    <label>Runtime: </label>
+                    <span></span>
+                </div>
+                <div class="add-to-list logged-in-visible">
+                    <label>Your Playlist: </label>
+                    <span></span>
+                </div>
+            </div>
+                    
+        </div>
+        
+	</metal:content-core>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="polklibrary.content.viewer">
+
+    
+       
+    <browser:page
+        for="*"
+        name="close_view"
+        class=".record.CloseView"
+        permission="zope.Public"
+        />
+        
+       
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="process_thumbnail"
+        class=".process_thumbnail2.ThumbnailProcess2"
+        permission="zope.Public"
+        />
+        
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="transformer"
+        class=".transformer.TransformerView"
+        permission="cmf.ManagePortal"
+        />
+
+<!--        
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="importer"
+        class=".importer.ImporterView"
+        permission="cmf.ManagePortal"
+        />
+-->
+
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="ws_patcher"
+        class=".ws_patcher.WSView"
+        permission="cmf.ManagePortal"
+        />
+
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="importer"
+        class=".importer2.Importer2View"
+        permission="cmf.ManagePortal"
+        />
+        
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="exporter"
+        class=".exporter.Exporter2View"
+        permission="cmf.ManagePortal"
+        />
+        
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="playlist"
+        class=".collection.UserListView"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="browse"
+        class=".collection.BrowseView"
+        permission="zope2.View"
+        />
+            
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="find"
+        class=".search.Search"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="polklibrary.content.viewer.models.contentrecord.IContentRecord"
+        name="record_view"
+        class=".record.RecordView"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="polklibrary.content.viewer.models.collection.ICollection"
+        name="collection_view"
+        class=".collection.CollectionView"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="polklibrary.content.viewer.models.collection.ICollection"
+        name="share"
+        class=".collection.ShareView"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="polklibrary.content.viewer.models.group_list.IGroupList"
+        name="group_list"
+        class=".group_list.GroupList"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="polklibrary.content.viewer.models.tag_cache.ITagCache"
+        name="cache_view"
+        class=".cache.CacheView"
+        permission="cmf.ManagePortal"
+        />
+        
+    <browser:page
+        for="*"
+        name="getBrowseList"
+        class=".ws_get_browse_list.WSView"
+        permission="zope2.View"
+        />
+        
+    <browser:page
+        for="*"
+        name="setFilm"
+        class=".ws_add_to_list.WSView"
+        permission="zope2.View"
+        />
+        
+      
+    
+    
+    
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="polklibrary.content.viewer.interfaces.IPolklibraryContentViewerLayer"
+      />
+
+  <!-- Publish static files -->
+  <browser:resourceDirectory
+      name="polklibrary.content.viewer"
+      directory="static"
+      />
+
+</configure>

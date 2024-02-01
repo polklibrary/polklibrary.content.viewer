@@ -1,0 +1,113 @@
+
+#importer > *{
+    margin-bottom: 25px;
+    position: relative;
+}
+
+#importer h2 > a {
+    color: #333;
+    font-weight: bold;
+}
+
+#importer div.heading {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#importer form{
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+}
+#importer form div {
+    margin: 5px 0 10px;
+}
+
+#importer form label {
+    color: #333;
+    display: inline;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+#importer form input[type="file"] {
+    color: #333;
+    display: inline;   
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+#importer form input[type="checkbox"] {
+    margin-left: 20px;
+    vertical-align: middle;
+}
+#importer form label[for] {
+    margin: 2px 0px 0px 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+#processing {
+    display: none;
+    height: 60px;
+    top: 0;
+    width: 30px;
+    position: relative;
+    left: 15px;
+}
+
+#importer .help{
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+}
+
+#importer .help h3 {
+    display: block;
+    margin: 5px 0px 10px 0px;
+    padding: 0;
+}
+
+#importer .help div {
+    margin: 5px 0px;
+}
+
+#importer .help div.example {
+    font-size: 12px;
+    font-style: italic;
+}
+
+#error {
+    background-color: #945353;
+    border: 1px solid #821515;
+    color: white !important;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+
+
+#output {
+    border: 1px solid #ccc;
+    color: #5600ff;
+    padding: 5px 10px;
+}
+#output > * {
+    display: block;
+}
+
+
+#csv-data {
+    width: 100%;
+    height: 600px;
+    white-space: pre;
+}
+
+
+#exporter form{
+    background-color: #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#exporter .output{
+    border: 1px solid #ccc;
+    color: #5600ff;
+    padding: 5px 10px;
+    height: 500px;
+}

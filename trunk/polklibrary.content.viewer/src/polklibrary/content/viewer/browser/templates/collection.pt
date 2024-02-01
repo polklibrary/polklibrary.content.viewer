@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/jquery.mobile.custom.min.js"></script>  
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/film.js"></script>
+	</metal:block>
+    
+    
+	<metal:block fill-slot="style_slot">
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/base.css" />
+	</metal:block>
+
+	<metal:content-title fill-slot="content-title"></metal:content-title>
+	<metal:content-description fill-slot="content-description"></metal:content-description>
+
+	<metal:content-core fill-slot="content-core">
+
+        <div class="collection" tal:define="container view/get_collection">
+            
+            <h2 class="vm">
+                <a href="${view/portal/absolute_url}">All Videos</a> 
+                <span class="separater"> &gt; </span>
+                <a href="${container/url}">${container/title}</a> 
+                <img tal:condition="view/shareable" 
+                     class="pat-share" 
+                     title="Share this collection" 
+                     src="++resource++polklibrary.content.viewer/share.png" 
+                     alt="Share" />
+                 <a tal:condition="view/has_editor_permission" class="pat-csv option-manager" href="${view/request/URL}?${view/request/QUERY_STRING}&csv=1">
+                     <img 
+                         title="Download CSV" 
+                         src="++resource++polklibrary.content.viewer/file.png" 
+                         alt="Download" />
+                 </a>
+            </h2>
+        
+            <tal:block tal:repeat="item container/items">
+                <a tal:define="image_url python:view.get_image_by_brain(item)"
+                    class="item ${item/format_type} pat-overlay"
+                    data-overlay-title="${item/Title}"
+                    data-overlay-description=" ${item/Description}"
+                    data-overlay-runtime="${item/runtime}"
+                    href="${item/getURL}" 
+                    style="background-image: url(${item/getURL}/++resource++polklibrary.content.viewer/${item/format_type}.png), url(${image_url});"
+                >
+                    <div class="add-to-list suppress-add-to-list">
+                        <span class="pat-film-list" data-id="${item/getId}" />
+                    </div>
+                
+                    <div class="title">
+                        ${item/Title}
+                    </div>
+                </a>
+            </tal:block>
+            
+            <div class="pagination" tal:condition="python: container.total > container.limit" >
+                ${container/total} Results: 
+                <tal:block repeat="page container/pages">
+                    <a tal:attributes="data-page-current python: str(page['start']) == request.form.get('start', '0')"
+                       href="${page/purl}">${page/number}</a>
+                </tal:block>
+            </div>
+            
+            
+            <div id="overlay">
+                <div class="title"> </div>
+                <div class="description pat-showmore" data-len="255"> </div>
+                <div class="runtime">
+                    <label>Runtime: </label>
+                    <span></span>
+                </div>
+                <div class="add-to-list logged-in-visible">
+                    <label>Your Playlist: </label>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div id="share">
+                <div>
+                    <span class="close">X</span>
+                    <label for="share-embed">Embed Code</label>
+                    <textarea id="share-embed" readonly="true"></textarea>
+                </div>
+            </div>
+            
+        </div>
+        <div class="clear"></div>
+
+	</metal:content-core>
+
+</body>
+</html>

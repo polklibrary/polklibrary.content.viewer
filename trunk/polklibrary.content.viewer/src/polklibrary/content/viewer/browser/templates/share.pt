@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="plone"
+	  lang="en">
+<head>
+        <script type="text/javascript" src="${view/portal/absolute_url}/++plone++static/components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/jquery.mobile.custom.min.js"></script>  
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/film.js"></script>
+        <script type="text/javascript">
+            Scroll.ImageSpace = 85;
+            Overlay.Width = 400;
+            Overlay.PushLeft = 85;
+            Overlay.PushRight = 425;
+        </script>
+        
+                
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/base.css" />
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++theme++polkpicks/css/share.css" />
+        <style>
+            html {
+                background-color: transparent;
+            }
+            body {
+                background-color: transparent;
+                font-size: 14px;
+                font-family: "Helvetica",Verdana,Lucida,Arial,sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            h2 {
+                margin: 10px 0 0px 0;
+            }
+            a { color: #111; text-decoration: none; }
+            a:hover { color: #111; text-decoration: none; }
+            .hide { display: none }
+            
+            
+            .collection a.item {
+                background-size: 60%, auto 125px;
+                height: 125px;
+                width: 75px;
+            }
+            .scroll-left, .scroll-right {
+                height: 145px;
+                top: 35px;
+            }
+            
+            
+        </style>
+    
+</head>
+<body data-portal-url="${view/portal/absolute_url}">
+
+    <div class="pat-scroll no-select">
+        <div class="collection" tal:define="container view/get_collection">
+            
+            <h2><a href="${container/url}" target="_parent">${container/title}</a></h2>
+            <div class="scroll-left">
+                <div class="arr-left"></div>
+            </div>
+            <div class="scrollbox" tal:attributes="data-items python:len(container.items)">
+                <!-- removed class .pat-overlay -->
+                
+                <tal:block tal:repeat="item container/items">
+                    <a tal:define="image_url python:view.get_image_by_brain(item)"
+                        class="item ${item/format_type}"
+                        data-overlay-title="${item/Title}"
+                        data-overlay-description=" ${item/Description}"
+                        data-overlay-runtime="${item/runtime}"
+                        href="${item/getURL}" 
+                        target="_parent"
+                        style="background-image: url(${item/getURL}/++resource++polklibrary.content.viewer/${item/format_type}.png), url(${image_url}), url('++resource++polklibrary.content.viewer/missing-thumb.png');"
+                    >    
+                        <div class="title hide">
+                            ${item/Title}
+                        </div>
+                    </a>
+                </tal:block>
+                    
+                <a class="item" 
+                   href="${container/url}" 
+                   style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/view-more.jpg)"
+                    target="_parent"
+                >
+                </a>
+                
+                <a class="item" 
+                   href="${view/portal/absolute_url}" 
+                   style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/goto.jpg)"
+                    target="_parent"
+                >
+                </a>
+                
+            </div>
+            <div class="scroll-right">
+                <div class="arr-right"></div>
+            </div>
+            
+        </div>
+                
+        
+    </div>
+    
+
+</body>
+</html>

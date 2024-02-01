@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/jquery.mobile.custom.min.js"></script>   
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/film.js"></script>        
+	</metal:block>
+    
+	<metal:block fill-slot="style_slot">
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/base.css" />
+	</metal:block>
+
+	<metal:content-title fill-slot="content-title"></metal:content-title>
+	<metal:content-description fill-slot="content-description"></metal:content-description>
+
+    
+	<metal:content-core fill-slot="content-core">
+
+        <div class="cache">
+            <h2>Rebuild Tag Cache</h2>
+            <form method="post" action="${context/absolute_url}">
+                <input type="submit" value="Rebuild Cache" name="cache.rebuild" /> (Administrator restricted)
+            </form>
+            
+            <div>
+                ${context/cache}
+            </div>
+        </div>
+        
+	</metal:content-core>
+
+</body>
+</html>

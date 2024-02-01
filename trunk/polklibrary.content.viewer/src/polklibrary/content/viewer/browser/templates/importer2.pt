@@ -1,0 +1,126 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+    
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('form').submit(function(){
+                    $('#processing').show();
+                });
+            });
+        </script>
+	</metal:block>
+    
+	<metal:block fill-slot="style_slot">
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/internal.css" />
+        
+    </metal:block>
+
+	<metal:content-title fill-slot="content-title">
+	</metal:content-title>
+
+    
+	<metal:content-core fill-slot="content-core">
+
+        <div id="importer">
+            <h2><a href="${view/portal/absolute_url}">Utility: Import</a></h2>
+            
+            <div id="error" tal:condition="view/error">ERROR:  ${view/error} </div>
+        
+            <div class="help">
+                <h3>How to add or overlay records?</h3>
+                
+                <div class="heading">CSV</div>
+                Add/Overlay .CSV -- first row must contain exact words, order and data:
+                <div class="example">
+                    ${view/csv_required_add_update_headings}
+                </div>
+                
+                <div class="heading">MARC</div>
+                Add/Overlay .MRC -- will pull data from each marc record provided.
+            </div>
+            
+            <div class="help">
+                <h3>How to delete records?</h3>
+                
+                <div class="heading">CSV</div>
+                Delete .CSV -- first row must contain exact words, order and data:
+                <div class="example">
+                    ${view/csv_required_delete_headings}
+                </div>
+                
+                <div class="heading">MARC</div>
+                Delete .MRC -- will pull data from each marc record provided.
+            </div>
+            
+            <div class="help">
+                <h3>How to activate/deactivate records?</h3>
+                
+                <div class="heading">CSV</div>
+                Activate/Deactivate .CSV -- first row must contain exact words, order and data:
+                <div class="example">
+                    ${view/csv_required_activation_headings}
+                </div>
+                <div class="heading">MARC</div>
+                Activate/Deactivate .MRC -- will pull data from each marc record provided.
+                
+            </div>
+            
+            <form method="post" enctype="multipart/form-data">
+                <div>
+                    <select name="form.container.type">
+                        <option value="boardgames">Boardgame</option>
+                        <option value="books">Book</option>
+                        <option value="dvds">DVD</option>
+                        <option selected="true" value="streams">Streams</option>
+                    </select>
+                    <label for="file-upload" >Upload (.CSV or .MRC only): </label>
+                    <input type="file" name="form.file.upload" id="file-upload" />
+                    
+                </div>
+                
+                <div>
+                    <input type="checkbox" name="form.autoactivate" id="auto-activate" />
+                    <label for="auto-activate" >Auto-activate on upload? (Only if thumbnail exists)</label>
+                    <br/>
+                    <!--<input type="checkbox" name="form.testrun" id="test-run" />
+                    <label for="test-run" >Test run? (Will not save anything. For test imports)</label>-->
+                </div>
+                
+                <div>
+                    <input type="submit" name="form.file.submit" value="Add/Overlay Records" />
+                    <input type="submit" name="form.file.delete" value="Delete Records" />
+                    <input type="submit" name="form.file.activate" value="Activate Records" />
+                    <input type="submit" name="form.file.deactivate" value="Deactivate Records" />
+                    <img id="processing" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/processing.gif" alt="Processing" />
+                </div>
+                
+            </form>
+            
+            <div id="output">
+                <strong>~$ Output</strong>
+                <span>~$ Creations: ${view/records_created}</span>
+                <span>~$ Creation Fails: ${view/records_created_failed}</span>
+                <span>~$ Overlays: ${view/records_updated}</span>
+                <span>~$ Overlay Fails: ${view/records_updated_failed}</span>
+                <span>~$ Deletions: ${view/records_deleted}</span>
+                <span>~$ Deletion Fails: ${view/records_deleted_failed}</span>
+                <span>~$ Activations: ${view/records_activated}</span>
+                <span>~$ Deactivations: ${view/records_deactivated}</span>
+                <span>~$ Activations/Deactivations Fails: ${view/records_activated_failed}</span>
+            </div>
+            
+            
+            
+        </div>
+        
+	</metal:content-core>
+
+</body>
+</html>

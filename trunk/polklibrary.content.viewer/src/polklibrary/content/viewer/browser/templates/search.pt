@@ -1,0 +1,115 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/jquery.mobile.custom.min.js"></script>   
+        <script type="text/javascript" src="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/film.js"></script>        
+	</metal:block>
+    
+	<metal:block fill-slot="style_slot">
+        <link type="text/css" rel="stylesheet" href="${view/portal/absolute_url}/++resource++polklibrary.content.viewer/base.css" />
+	</metal:block>
+
+	<metal:content-title fill-slot="content-title"><h2>Search</h2></metal:content-title>
+	<metal:content-description fill-slot="content-description"></metal:content-description>
+
+    
+	<metal:content-core fill-slot="content-core">
+
+        <div id="find">
+            <form method="get" class="column">
+           
+                <div class="col-30">
+                    <input placeholder="Search here" autofocus="autofocus" type="text" name="form.query" tal:attributes="value python:request.form.get('form.query','')" />
+                </div>
+                <div class="col-30">
+                    <label>Sort by: </label>
+                    <select name="form.sort">
+                        <option value="sortable_title" tal:attributes="selected python:request.form.get('form.sort','')=='sortable_title'">Title</option>
+                        <option value="created" tal:attributes="selected python:request.form.get('form.sort','')=='created'">Add Date</option>
+                    </select>
+                    <select name="form.sort.direction">
+                        <option value="ascending" tal:attributes="selected python:request.form.get('form.sort.direction','')=='ascending'">Ascending</option>
+                        <option value="descending" tal:attributes="selected python:request.form.get('form.sort.direction','')=='descending'">Descending</option>
+                    </select>
+                </div>
+                
+                <div class="col-10">   
+                    <input type="submit" name="form.submit" value="Search" />
+                </div>
+                <div class="col-10 option-manager">   
+                    <input type="submit" name="form.csv.submit" value="Download CSV" />
+                </div>
+                <div class="clear"></div>
+            </form>
+            
+            <div class="collection column" tal:define="container view/get_collection" tal:condition="container/items">
+                
+                <h2 class="vm">
+                    <a href="${container/url}"><span tal:replace="python: len(container.items)" /> ${container/title} </a> 
+                </h2>
+            
+                <tal:block tal:repeat="item container/items">
+                    <a tal:define="image_url python:view.get_image_by_brain(item)"
+                        class="item ${item/format_type} pat-overlay"
+                        data-overlay-title="${item/Title}"
+                        data-overlay-description=" ${item/Description}"
+                        data-overlay-runtime="${item/runtime}"
+                        href="${item/getURL}" 
+                        style="background-image: url(${item/getURL}/++resource++polklibrary.content.viewer/${item/format_type}.png), url(${image_url});"
+                    >
+                        <div class="add-to-list suppress-add-to-list">
+                            <span class="pat-film-list" data-id="${item/getId}" />
+                        </div>
+                    
+                        <div class="title">
+                            ${item/Title}
+                        </div>
+                    </a>
+                </tal:block>
+                
+                <div class="pagination" tal:condition="python: container.total > container.limit" >
+                    ${container/total} Results: 
+                    <tal:block repeat="page container/pages">
+                        <a tal:attributes="data-page-current python: str(page['start']) == request.form.get('start', '0')"
+                           href="${page/purl}">${page/number}</a>
+                    </tal:block>
+                </div>
+            
+                <div id="overlay">
+                    <div class="title"> </div>
+                    <div class="description pat-showmore" data-len="255"> </div>
+                    <div class="runtime">
+                        <label>Runtime: </label>
+                        <span></span>
+                    </div>
+                    <div class="add-to-list logged-in-visible">
+                        <label>Your Playlist: </label>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <div id="share">
+                    <div>
+                        <span class="close">X</span>
+                        <label for="share-embed">Embed Code</label>
+                        <textarea id="share-embed" readonly="true"></textarea>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="clear"></div>
+
+            
+            
+        </div>
+        
+	</metal:content-core>
+
+</body>
+</html>
