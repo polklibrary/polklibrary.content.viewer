@@ -18,6 +18,7 @@ class GroupList(BrowserView, Tools):
         return self.template()
 
     def is_local_ip(self):
+        print(self.get_ip())
         return self.get_ip().startswith('141.233.')
 
     def load_collections(self):

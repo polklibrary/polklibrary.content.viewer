@@ -456,6 +456,7 @@ class ShareView(CollectionView, Tools):
         
 
     def is_local_ip(self):
+        print(self.get_ip())
         return self.get_ip().startswith('141.233.')
 
 
