@@ -25,7 +25,8 @@
             You must be on campus or logged in to view content.
         </div>
 
-        <div class="pat-scroll group-list no-select" tal:condition="view/is_local_ip" tal:define="tmp view/load_collections" >
+        <tal:block condition="view/is_local_ip">
+        <div class="pat-scroll group-list no-select" tal:define="tmp view/load_collections">
         
             <div class="collection" tal:repeat="container view/group_collections">
                 
@@ -83,7 +84,8 @@
             </div>
                     
         </div>
-        
+        </tal:block>
+
 	</metal:content-core>
 
 </body>
