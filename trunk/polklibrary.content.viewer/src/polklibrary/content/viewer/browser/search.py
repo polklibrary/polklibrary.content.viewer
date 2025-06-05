@@ -20,7 +20,11 @@ class Search(BrowserView, Tools):
             
         return self.template()
     
-        
+
+    def is_local_ip(self):
+        return self.get_ip().startswith('141.233.')
+
+
     def get_collection(self):
         queryraw = self.request.form.get('form.query','').lower()
         start = int(self.request.form.get("start", 0))

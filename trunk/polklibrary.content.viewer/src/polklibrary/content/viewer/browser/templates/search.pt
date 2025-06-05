@@ -21,7 +21,12 @@
     
 	<metal:content-core fill-slot="content-core">
 
-        <div id="find">
+        <div class="access-restricted" tal:condition="not: view/is_local_ip">
+            You must be on campus or logged in to view content.
+        </div>
+
+
+        <div id="find"  tal:condition="view/is_local_ip">
             <form method="get" class="column">
            
                 <div class="col-30">

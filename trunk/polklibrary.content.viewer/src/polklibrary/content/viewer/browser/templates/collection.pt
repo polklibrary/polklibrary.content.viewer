@@ -21,7 +21,12 @@
 
 	<metal:content-core fill-slot="content-core">
 
-        <div class="collection" tal:define="container view/get_collection">
+        <div class="access-restricted" tal:condition="not: view/is_local_ip">
+            You must be on campus or logged in to view content.
+        </div>
+
+
+        <div class="collection" tal:define="container view/get_collection"  tal:condition="view/is_local_ip">
             
             <h2 class="vm">
                 <a href="${view/portal/absolute_url}">All Videos</a> 

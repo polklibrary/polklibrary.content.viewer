@@ -21,7 +21,11 @@
     
 	<metal:content-core fill-slot="content-core">
 
-        <div class="pat-scroll group-list no-select">
+        <div class="access-restricted" tal:condition="not: view/is_local_ip">
+            You must be on campus or logged in to view content.
+        </div>
+
+        <div class="pat-scroll group-list no-select" tal:define="tmp view/load_collections" tal:condition="view/is_local_ip">
         
             <div class="collection" tal:repeat="container view/group_collections">
                 

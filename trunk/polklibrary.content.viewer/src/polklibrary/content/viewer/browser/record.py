@@ -41,6 +41,11 @@ class RecordView(BrowserView, Tools):
         
         return self.template()
         
+
+    def is_local_ip(self):
+        return self.get_ip().startswith('141.233.')
+
+
     def is_login_required(self):
         return api.user.is_anonymous() and self.context.login_required
         

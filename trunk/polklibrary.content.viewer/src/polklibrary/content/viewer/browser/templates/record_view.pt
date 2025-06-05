@@ -20,7 +20,11 @@
 
 	<metal:content-core fill-slot="content-core">
 
-        <div class="record">
+        <div class="access-restricted" tal:condition="not: view/is_local_ip">
+            You must be on campus or logged in to view content.
+        </div>
+
+        <div class="record"  tal:condition="view/is_local_ip">
             <h2><a href="${context/absolute_url}" target="_top">${context/Title}</a></h2>
             
             <div class="column">

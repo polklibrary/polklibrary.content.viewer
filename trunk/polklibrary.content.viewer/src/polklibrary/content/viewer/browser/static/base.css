@@ -434,3 +434,14 @@ span.pat-film-list[data-added="1"] {
 }
 
 
+.access-restricted {
+    background-color: rgb(205 36 36 / 50%);
+    color: white;
+    font-weight: bold;
+    font-size: 26px;
+    text-align: center;
+    width: 800px;
+    margin: auto;
+    border-radius: 2px;
+    padding: 20px;
+}

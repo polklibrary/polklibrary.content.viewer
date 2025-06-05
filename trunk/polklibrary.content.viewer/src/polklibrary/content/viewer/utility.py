@@ -28,6 +28,29 @@ class VendorInfo:
 
 class Tools(object):
 
+    def get_ip(self):
+        if "HTTP_X_FORWARDED_FOR" in self.request.environ:
+            # Virtual host
+            ip = self.request.environ["HTTP_X_FORWARDED_FOR"]
+        elif "HTTP_HOST" in self.request.environ:
+            # Non-virtualhost
+            ip = self.request.environ["REMOTE_ADDR"]
+        else:
+            # Unit test code?
+            ip = '0.0.0.0'
+
+        if ',' in ip:
+            ips = ip.split(',')
+            return ips[0]
+
+        if ip == '10.0.2.2': #local testing
+            ip = '141.233.fake' # faked
+        if not api.user.is_anonymous():
+            ip = '141.233.fake' # faked
+
+        return ip
+
+
     def get_image_by_obj(self, o=None):
         if not o:
             o = self.context

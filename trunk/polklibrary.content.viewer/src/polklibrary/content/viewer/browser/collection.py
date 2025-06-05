@@ -339,6 +339,11 @@ class BrowseView(BrowserView, Tools):
             return BrainsToCSV(self.get_collection().items)
         return self.template()
         
+
+    def is_local_ip(self):
+        return self.get_ip().startswith('141.233.')
+
+
     def has_editor_permission(self):
         membership = api.portal.get_tool('portal_membership')
         return bool(membership.checkPermission('Portlets: Manage portlets', self.context))
@@ -365,7 +370,11 @@ class UserListView(BrowserView, Tools):
             self.request.response.setHeader("Content-Disposition", "attachment;filename=collection.csv")
             return BrainsToCSV(self.get_collection().items)
         return self.template()
-        
+       
+    def is_local_ip(self):
+        return self.get_ip().startswith('141.233.')
+
+
     def has_editor_permission(self):
         membership = api.portal.get_tool('portal_membership')
         return bool(membership.checkPermission('Portlets: Manage portlets', self.context))
@@ -417,6 +426,11 @@ class CollectionView(BrowserView, Tools):
             return BrainsToCSV(self.get_collection().items)
         return self.template()
         
+
+    def is_local_ip(self):
+        return self.get_ip().startswith('141.233.')
+
+
     def has_editor_permission(self):
         membership = api.portal.get_tool('portal_membership')
         return bool(membership.checkPermission('Portlets: Manage portlets', self.context))
@@ -440,6 +454,11 @@ class ShareView(CollectionView, Tools):
         self.request.response.setHeader('X-Frame-Options', 'ALLOWALL')
         return self.template()
         
+
+    def is_local_ip(self):
+        return self.get_ip().startswith('141.233.')
+
+
     def has_editor_permission(self):
         membership = api.portal.get_tool('portal_membership')
         return bool(membership.checkPermission('Portlets: Manage portlets', self.context))
