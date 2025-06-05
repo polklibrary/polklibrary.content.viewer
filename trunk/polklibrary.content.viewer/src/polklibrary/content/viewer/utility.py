@@ -39,15 +39,16 @@ class Tools(object):
             # Unit test code?
             ip = '0.0.0.0'
 
-        if ',' in ip:
-            ips = ip.split(',')
-            return ips[0]
 
         if ip == '10.0.2.2': #local testing
             ip = '141.233.fake' # faked
-        if not api.user.is_anonymous():
-            ip = '141.233.fake' # faked
 
+        if not api.user.is_anonymous():
+            ip = '141.233.authed' # faked
+
+        if ',' in ip:
+            ips = ip.split(',')
+            return ips[0]
         return ip
 
 
