@@ -48,7 +48,8 @@ class Tools(object):
 
         if ',' in ip:
             ips = ip.split(',')
-            return ips[0]
+            ip = ips[0]
+
         return ip
 
 

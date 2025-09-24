@@ -60,6 +60,9 @@
                        href="${container/url}" 
                        style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/view-more.jpg)"
                     >
+                        <div class="title">
+                            View More
+                        </div>
                     </a>
                     
                 </div>
