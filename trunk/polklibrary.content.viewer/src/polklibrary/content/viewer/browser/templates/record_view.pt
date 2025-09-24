@@ -59,28 +59,28 @@
                 <div class="info col-50">
                 
                     <tal:block condition="context/Description">
-                    <h4>Description</h4>
+                    <div>Description</div>
                     <div id="description" class="pat-showmore" data-len="255">
                         ${context/Description}
                     </div>
                     </tal:block>
                     
                     <tal:block condition="context/runtime">
-                    <h4>Runtime</h4>
+                    <div>Runtime</div>
                     <div id="runtime">
                         ${context/runtime}
                     </div>
                     </tal:block>
                     
                     <tal:block condition="context/creator">
-                    <h4>Creator</h4>
+                    <div>Creator</div>
                     <div id="creator">
                         ${context/creator}
                     </div>
                     </tal:block>
                     
                     <tal:block condition="context/series_title">
-                    <h4>Series</h4>
+                    <div>Series</div>
                     <ul>
                         <li class="caps" tal:repeat="item context/series_title">
                             <a href="${view/portal/absolute_url}/browse?series_title=${item}">${item} (<span tal:replace="python: view.get_totals('series_title', item)" />)</a>
@@ -90,7 +90,7 @@
                     
                     
                     <tal:block condition="context/subject_group">
-                    <h4>Subjects</h4>
+                    <div>Subjects</div>
                     <ul>
                         <li class="caps" tal:repeat="item context/subject_group">
                             <a href="${view/portal/absolute_url}/browse?subject_group=${item}">${item} (<span tal:replace="python: view.get_totals('subject_group', item)" />)</a>
@@ -100,7 +100,7 @@
                     
                     
                     <tal:block condition="context/associated_entity">
-                    <h4>Contributor</h4>
+                    <div>Contributor</div>
                     <ul>
                         <li class="caps" tal:repeat="item context/associated_entity">
                             <a href="${view/portal/absolute_url}/browse?associated_entity=${item}">${item}  (<span tal:replace="python: view.get_totals('associated_entity', item)" />)</a>
@@ -110,7 +110,7 @@
                     
                     
                     <tal:block condition="context/geography">
-                    <h4>Geography</h4>
+                    <div>Geography</div>
                     <ul>
                         <li class="caps" tal:repeat="item context/geography">
                             <a href="${view/portal/absolute_url}/browse?geography=${item}">${item}  (<span tal:replace="python: view.get_totals('geography', item)" />)</a>
@@ -120,7 +120,7 @@
                     
                     
                     <tal:block condition="context/genre">
-                    <h4>Genre</h4>
+                    <div>Genre</div>
                     <ul>
                         <li class="caps" tal:repeat="item context/genre">
                             <a href="${view/portal/absolute_url}/browse?genre=${item}">${item} (<span tal:replace="python: view.get_totals('genre', item)" />)</a>
@@ -129,16 +129,16 @@
                     </tal:block>
                     
                     <tal:block condition="context/date_of_publication">
-                    <h4>Date of Publication</h4>
+                    <div>Date of Publication</div>
                     <div id="date_of_publication">
                         ${context/date_of_publication}
                     </div>
                     </tal:block>
                                  
-                    <h4>Database</h4>
+                    <div>Database</div>
                     <div>${view/get_vender_name}</div>
                     
-                    <h4>Direct Link</h4>
+                    <div>Direct Link</div>
                     <div>
                         <a class="slink" href="${context/getRemoteUrl}" target="_blank">
                             <img src="++resource++polklibrary.content.viewer/link.png" alt="Link" /> 
@@ -191,6 +191,9 @@
                                href="${view/portal/absolute_url}/browse?${suburl}" 
                                style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/view-more.jpg)"
                             >
+                                <div class="title">
+                                    View More
+                                </div>
                             </a>
                             
                         </div>
@@ -205,11 +208,11 @@
                         <div class="title"> </div>
                         <div class="description pat-showmore" data-len="255"> </div>
                         <div class="runtime">
-                            <label>Runtime: </label>
+                            <strong>Runtime: </strong>
                             <span></span>
                         </div>
                         <div class="add-to-list logged-in-visible">
-                            <label>Your Playlist: </label>
+                            <strong>Your Playlist: </strong>
                             <span></span>
                         </div>
                     </div>

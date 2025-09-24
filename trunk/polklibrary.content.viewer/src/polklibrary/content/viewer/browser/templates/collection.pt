@@ -77,11 +77,11 @@
                 <div class="title"> </div>
                 <div class="description pat-showmore" data-len="255"> </div>
                 <div class="runtime">
-                    <label>Runtime: </label>
+                    <strong>Runtime: </strong>
                     <span></span>
                 </div>
                 <div class="add-to-list logged-in-visible">
-                    <label>Your Playlist: </label>
+                    <strong>Your Playlist: </strong>
                     <span></span>
                 </div>
             </div>

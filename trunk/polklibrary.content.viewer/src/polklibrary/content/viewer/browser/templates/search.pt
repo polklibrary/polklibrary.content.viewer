@@ -30,25 +30,25 @@
             <form method="get" class="column">
            
                 <div class="col-30">
-                    <input placeholder="Search here" autofocus="autofocus" type="text" name="form.query" tal:attributes="value python:request.form.get('form.query','')" />
+                    <input aria-label="Search here for streaming videos" placeholder="Search here" autofocus="autofocus" type="text" name="form.query" tal:attributes="value python:request.form.get('form.query','')" />
                 </div>
                 <div class="col-30">
                     <label>Sort by: </label>
-                    <select name="form.sort">
+                    <select name="form.sort" aria-label="Sort type: Title or Add Date">
                         <option value="sortable_title" tal:attributes="selected python:request.form.get('form.sort','')=='sortable_title'">Title</option>
                         <option value="created" tal:attributes="selected python:request.form.get('form.sort','')=='created'">Add Date</option>
                     </select>
-                    <select name="form.sort.direction">
+                    <select name="form.sort.direction" aria-label="Sort Direction">
                         <option value="ascending" tal:attributes="selected python:request.form.get('form.sort.direction','')=='ascending'">Ascending</option>
                         <option value="descending" tal:attributes="selected python:request.form.get('form.sort.direction','')=='descending'">Descending</option>
                     </select>
                 </div>
                 
                 <div class="col-10">   
-                    <input type="submit" name="form.submit" value="Search" />
+                    <input aria-label="Search Button" type="submit" name="form.submit" value="Search" />
                 </div>
                 <div class="col-10 option-manager">   
-                    <input type="submit" name="form.csv.submit" value="Download CSV" />
+                    <input aria-label="Download CSV" type="submit" name="form.csv.submit" value="Download CSV" />
                 </div>
                 <div class="clear"></div>
             </form>
@@ -90,11 +90,11 @@
                     <div class="title"> </div>
                     <div class="description pat-showmore" data-len="255"> </div>
                     <div class="runtime">
-                        <label>Runtime: </label>
+                        <strong>Runtime: </strong>
                         <span></span>
                     </div>
                     <div class="add-to-list logged-in-visible">
-                        <label>Your Playlist: </label>
+                        <strong>Your Playlist: </strong>
                         <span></span>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                 <div id="share">
                     <div>
                         <span class="close">X</span>
-                        <label for="share-embed">Embed Code</label>
+                        <strong for="share-embed">Embed Code</strong>
                         <textarea id="share-embed" readonly="true"></textarea>
                     </div>
                 </div>
