@@ -45,11 +45,11 @@
                         <div class="clear"></div>
                         
                         <div class="add-to-list logged-in-visible">
-                            <label>Your Playlist: </label> <span class="pat-film-list" data-id="${context/getId}" />
+                            <strong>Your Playlist: </strong> <span class="pat-film-list" data-id="${context/getId}" />
                         </div>
                         
                         <div class="like logged-in-visible">
-                            <label>${context/likes} </label> <a href="${context/absolute_url}?like=1"></a>
+                            <strong>${context/likes} </strong> <a href="${context/absolute_url}?like=1" aria-label="Likes"> </a>
                         </div>
                         
                     </div>

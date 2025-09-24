@@ -83,6 +83,9 @@
                    style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/view-more.jpg)"
                     target="_parent"
                 >
+                    <div class="title">
+                        View More
+                    </div>
                 </a>
                 
                 <a class="item" 
@@ -90,6 +93,9 @@
                    style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/goto.jpg)"
                     target="_parent"
                 >
+                    <div class="title">
+                        All Streams
+                    </div>
                 </a>
                 
             </div>

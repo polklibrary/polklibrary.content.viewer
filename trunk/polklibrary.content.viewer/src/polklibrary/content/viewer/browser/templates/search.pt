@@ -33,7 +33,7 @@
                     <input aria-label="Search here for streaming videos" placeholder="Search here" autofocus="autofocus" type="text" name="form.query" tal:attributes="value python:request.form.get('form.query','')" />
                 </div>
                 <div class="col-30">
-                    <label>Sort by: </label>
+                    <strong>Sort by: </strong>
                     <select name="form.sort" aria-label="Sort type: Title or Add Date">
                         <option value="sortable_title" tal:attributes="selected python:request.form.get('form.sort','')=='sortable_title'">Title</option>
                         <option value="created" tal:attributes="selected python:request.form.get('form.sort','')=='created'">Add Date</option>
@@ -102,7 +102,7 @@
                 <div id="share">
                     <div>
                         <span class="close">X</span>
-                        <strong for="share-embed">Embed Code</strong>
+                        <label for="share-embed">Embed Code</label>
                         <textarea id="share-embed" readonly="true"></textarea>
                     </div>
                 </div>
