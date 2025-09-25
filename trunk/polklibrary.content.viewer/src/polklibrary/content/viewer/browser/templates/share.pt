@@ -71,6 +71,7 @@
                         href="${item/getURL}" 
                         target="_parent"
                         style="background-image: url(${item/getURL}/++resource++polklibrary.content.viewer/${item/format_type}.png), url(${image_url}), url('++resource++polklibrary.content.viewer/missing-thumb.png');"
+                        aria-label="${item/Title}"
                     >    
                         <div class="title hide">
                             ${item/Title}
@@ -82,6 +83,7 @@
                    href="${container/url}" 
                    style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/view-more.jpg)"
                     target="_parent"
+                    aria-label="View More"
                 >
                     <div class="title">
                         View More
@@ -92,6 +94,7 @@
                    href="${view/portal/absolute_url}" 
                    style="background-image: url(), url(${container/url}/++resource++polklibrary.content.viewer/goto.jpg)"
                     target="_parent"
+                    aria-label="All Streams"
                 >
                     <div class="title">
                         All Streams
