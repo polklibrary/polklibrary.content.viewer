@@ -206,6 +206,8 @@ def process_marc(marc_stream):
             
             if 'image' in ela_desc or 'thumbnail' in ela_desc:
                 record_image_url = ela_url
+            elif ela_url.endswith('.jpg') or ela_url.endswith('.png') or ela_desc.endswith('.jpg') or ela_desc.endswith('.png'):
+                record_image_url = ela_url
             else:
                 record_direct_url = ela_url #assume it is a link
         
@@ -219,6 +221,8 @@ def process_marc(marc_stream):
             record_vendor_id = VendorInfo.KANOPY_TARGET + str(re.sub("[^0-9]", "", record_id)) # strip kan form original id
         elif 'docuseek2.com' in record_direct_url:
             record_vendor_id = VendorInfo.DOCUSEEK_TARGET + (str(record_id).replace('doc',''))
+        elif '.swank' in record_direct_url:
+            record_vendor_id = VendorInfo.SWANK_TARGET + (str(record_id).replace('swa',''))
         
             
         output.append([

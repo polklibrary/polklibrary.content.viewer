@@ -45,7 +45,7 @@ class ThumbnailProcess2(BrowserView):
         #options.add_argument("--headless")
         
         
-        if 'localhost:8080' in self.context.absolute_url(): # local testing server only
+        if 'localhost:80' in self.context.absolute_url(): # local testing server only
             driver = webdriver.Firefox(executable_path=r'/home/vagrant/Plone/zinstance/geckodriver', firefox_profile=profile, options=options)
         else:
             driver = webdriver.Firefox(executable_path=r'/opt/plone5.2/zeocluster/geckodriver', firefox_profile=profile, options=options)
@@ -76,6 +76,8 @@ class ThumbnailProcess2(BrowserView):
                     output += self.process_kan(driver, brain)
                 if VendorInfo.DOCUSEEK_TARGET in brain.getId:
                     output += self.process_doc(driver, brain)
+                if VendorInfo.SWANK_TARGET in brain.getId:
+                    output += self.process_swank(driver, brain)
                 time.sleep(2)
                 
             output += '\n\n Thumbnails Left: ' + str(len(brains)) + '\n'
@@ -86,7 +88,8 @@ class ThumbnailProcess2(BrowserView):
                 
         return output
         
-        
+    def process_swank(self, driver, brain):
+        return brain.getURL() + ' Swank has thumbnails in MARC \n'
         
     def process_aso(self, driver, brain):
         do_deletes = self.request.get('deletes', '0')
